@@ -24,6 +24,7 @@ function randomClick(monkeysLeft) {
                 monkeysLeft = monkeysLeft - 1;
             }
             setTimeout(randomClick, 500, monkeysLeft);
+
         });
     }
 }
