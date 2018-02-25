@@ -1,10 +1,11 @@
 
+var events= [randomClickLink,randomClickButton,randomTypeText,randomSelect];
 describe('Los estudiantes under monkeys', function() {
     it('visits los estudiantes and execute: clicks or select combobox', function() {
         cy.visit('https://losestudiantes.co');
         cy.contains('Cerrar').click();
         cy.wait(1000);
-        executeRandonEvent(20);
+        executeRandonEvent(10);
     })
 });
 
@@ -52,9 +53,9 @@ function randomSelect() {
 }
 
 function executeRandonEvent (maxEvents){
-  var events= [randomClickLink,randomClickButton,randomTypeText,randomSelect];
-
-  for (var i = 0; i < maxEvents; i++) {
+  if(maxEvents>0){
        events[getRandomInt(0, events.length)]();
+       var nextTotalEvents = maxEvents-1;
+       executeRandonEvent(nextTotalEvents);
   }
 }
