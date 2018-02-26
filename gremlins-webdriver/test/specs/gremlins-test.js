@@ -22,14 +22,23 @@ function unleashGremlins(ttl, callback) {
 
   formFiller.canFillElement(function (element){
         var isTextType = element.type == "text" || element.type == "password" || element.type == "textarea";
-        console.log(isTextType)
         return isTextType && !element.hidden;
     });
 
-  var horde = window.gremlins.createHorde();
 
+  var clicks = window.gremlins.species.clicker().clickTypes(['click']);
+
+  clicks.canClick(function(element){
+    var caDoClick = element.type=="button" || element.tagName=="A";
+    return caDoClick && !element.hidden;
+  });
+
+  var horde = window.gremlins.createHorde();
   horde.gremlin(formFiller);
+  horde.gremlin(clicks);
   horde.seed(1234);
+
+)
 
   horde.after(callback);
   window.onbeforeunload = stop;
